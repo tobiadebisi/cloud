@@ -8,7 +8,7 @@ terraform {
 
   backend "remote" {
     hostname     = "app.terraform.io"
-    organization = "prismpay"
+    organization = "organization-name"
 
     workspaces {
       prefix = "storage_account-"
