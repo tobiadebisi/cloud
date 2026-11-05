@@ -1,5 +1,5 @@
 module "resource_group" {
-  source  = "app.terraform.io/prismpay/modules/azure//resource_group"
+  source  = "app.terraform.io/organization-name/modules/azure//resource_group"
   version = "1.0.0"
 
   name        = "${var.environment}-${var.project}-private-dns-zone-resource-group"
@@ -14,7 +14,7 @@ data "azurerm_virtual_network" "virtual_network" {
 }
 
 module "private_dns_zone" {
-  source  = "app.terraform.io/prismpay/modules/azure//private_dns_zone"
+  source  = "app.terraform.io/organization-name/modules/azure//private_dns_zone"
   version = "1.0.0"
 
   name                = var.domian_name
@@ -24,7 +24,7 @@ module "private_dns_zone" {
 }
 
 module "private_dns_zone_virtual_network_link" {
-  source  = "app.terraform.io/prismpay/modules/azure//private_dns_zone_virtual_network_link"
+  source  = "app.terraform.io/organization-name/modules/azure//private_dns_zone_virtual_network_link"
   version = "1.0.0"
 
   name                  = "${var.environment}-${var.project}-private-dns-zone-virtual-network-link"

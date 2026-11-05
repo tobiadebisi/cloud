@@ -1,5 +1,5 @@
 module "resource_group" {
-  source  = "app.terraform.io/prismpay/modules/azure//resource_group"
+  source  = "app.terraform.io/organization-name/modules/azure//resource_group"
   version = "1.0.0"
 
   name        = "${var.environment}-${var.project}-virtual-network-resource-group"
@@ -9,7 +9,7 @@ module "resource_group" {
 }
 
 module "virtual_network" {
-  source  = "app.terraform.io/prismpay/modules/azure//virtual_network"
+  source  = "app.terraform.io/organization-name/modules/azure//virtual_network"
   version = "1.0.0"
 
   name                = "${var.environment}-${var.project}-virtual-network"
@@ -23,7 +23,7 @@ module "virtual_network" {
 //--------------------------------------------------------------------------------
 
 module "cardholder_subnet" {
-  source  = "app.terraform.io/prismpay/modules/azure//subnet_iaas"
+  source  = "app.terraform.io/organization-name/modules/azure//subnet_iaas"
   version = "1.0.0"
 
   name                    = "${var.environment}-${var.project}-cardholder-subnet"
@@ -34,7 +34,7 @@ module "cardholder_subnet" {
 }
 
 module "cardholder_network_security_group" {
-  source  = "app.terraform.io/prismpay/modules/azure//network_security_group"
+  source  = "app.terraform.io/organization-name/modules/azure//network_security_group"
   version = "1.0.0"
 
   name                = "${var.environment}-${var.project}-network-security-group-cardholder-data-subnet"
@@ -47,7 +47,7 @@ module "cardholder_network_security_group" {
 
 
 module "cardholder_network_security_group_association" {
-  source  = "app.terraform.io/prismpay/modules/azure//subnet_network_security_group_association"
+  source  = "app.terraform.io/organization-name/modules/azure//subnet_network_security_group_association"
   version = "1.0.0"
 
   subnet_id                 = module.cardholder_subnet.subnet_id
@@ -57,7 +57,7 @@ module "cardholder_network_security_group_association" {
 //--------------------------------------------------------------------------------
 
 module "internal_subnet" {
-  source  = "app.terraform.io/prismpay/modules/azure//subnet_iaas"
+  source  = "app.terraform.io/organization-name/modules/azure//subnet_iaas"
   version = "1.0.0"
 
   name                    = "${var.environment}-${var.project}-internal-subnet"
@@ -68,7 +68,7 @@ module "internal_subnet" {
 }
 
 module "internal_network_security_group" {
-  source  = "app.terraform.io/prismpay/modules/azure//network_security_group"
+  source  = "app.terraform.io/organization-name/modules/azure//network_security_group"
   version = "1.0.0"
 
   name                = "${var.environment}-${var.project}-network-security-group-internal-subnet"
@@ -81,7 +81,7 @@ module "internal_network_security_group" {
 
 
 module "internal_network_security_group_association" {
-  source  = "app.terraform.io/prismpay/modules/azure//subnet_network_security_group_association"
+  source  = "app.terraform.io/organization-name/modules/azure//subnet_network_security_group_association"
   version = "1.0.0"
 
   subnet_id                 = module.internal_subnet.subnet_id
@@ -91,7 +91,7 @@ module "internal_network_security_group_association" {
 //--------------------------------------------------------------------------------
 
 module "application_gateway_subnet" {
-  source  = "app.terraform.io/prismpay/modules/azure//subnet_iaas"
+  source  = "app.terraform.io/organization-name/modules/azure//subnet_iaas"
   version = "1.0.0"
 
   name                    = "${var.environment}-${var.project}-application-gateway-subnet"
@@ -102,7 +102,7 @@ module "application_gateway_subnet" {
 }
 
 module "application_gateway_network_security_group" {
-  source  = "app.terraform.io/prismpay/modules/azure//network_security_group"
+  source  = "app.terraform.io/organization-name/modules/azure//network_security_group"
   version = "1.0.0"
 
   name                = "${var.environment}-${var.project}-network-security-group-application-gateway-subnet"
@@ -115,7 +115,7 @@ module "application_gateway_network_security_group" {
 
 
 module "application_gateway_network_security_group_association" {
-  source  = "app.terraform.io/prismpay/modules/azure//subnet_network_security_group_association"
+  source  = "app.terraform.io/organization-name/modules/azure//subnet_network_security_group_association"
   version = "1.0.0"
 
   subnet_id                 = module.application_gateway_subnet.subnet_id
@@ -125,7 +125,7 @@ module "application_gateway_network_security_group_association" {
 //--------------------------------------------------------------------------------
 
 module "apim_subnet" {
-  source  = "app.terraform.io/prismpay/modules/azure//subnet_iaas"
+  source  = "app.terraform.io/organization-name/modules/azure//subnet_iaas"
   version = "1.0.0"
 
   name                    = "${var.environment}-${var.project}-apim-subnet"
@@ -136,7 +136,7 @@ module "apim_subnet" {
 }
 
 module "apim_network_security_group" {
-  source  = "app.terraform.io/prismpay/modules/azure//network_security_group"
+  source  = "app.terraform.io/organization-name/modules/azure//network_security_group"
   version = "1.0.0"
 
   name                = "${var.environment}-${var.project}-network-security-group-apim-subnet"
@@ -149,7 +149,7 @@ module "apim_network_security_group" {
 
 
 module "apim_network_security_group_association" {
-  source  = "app.terraform.io/prismpay/modules/azure//subnet_network_security_group_association"
+  source  = "app.terraform.io/organization-name/modules/azure//subnet_network_security_group_association"
   version = "1.0.0"
 
   subnet_id                 = module.apim_subnet.subnet_id
@@ -159,7 +159,7 @@ module "apim_network_security_group_association" {
 //--------------------------------------------------------------------------------
 
 module "mssql_server_subnet" {
-  source  = "app.terraform.io/prismpay/modules/azure//subnet_iaas"
+  source  = "app.terraform.io/organization-name/modules/azure//subnet_iaas"
   version = "1.0.0"
 
   name                 = "${var.environment}-${var.project}-mssql-server-subnet"
@@ -170,7 +170,7 @@ module "mssql_server_subnet" {
 }
 
 module "mssql_server_network_security_group" {
-  source  = "app.terraform.io/prismpay/modules/azure//network_security_group"
+  source  = "app.terraform.io/organization-name/modules/azure//network_security_group"
   version = "1.0.0"
 
   name                = "${var.environment}-${var.project}-network-security-group-mssql-server-subnet"
@@ -183,7 +183,7 @@ module "mssql_server_network_security_group" {
 
 
 module "mssql_server_network_security_group_association" {
-  source  = "app.terraform.io/prismpay/modules/azure//subnet_network_security_group_association"
+  source  = "app.terraform.io/organization-name/modules/azure//subnet_network_security_group_association"
   version = "1.0.0"
 
   subnet_id                 = module.mssql_server_subnet.subnet_id
@@ -193,14 +193,14 @@ module "mssql_server_network_security_group_association" {
 //--------------------------------------------------------------------------------
 
 module "sonarqube_subnet" {
-  source  = "app.terraform.io/prismpay/modules/azure//subnet_iaas_dynamic"
+  source  = "app.terraform.io/organization-name/modules/azure//subnet_iaas_dynamic"
   version = "1.0.0"
 
   subnet_variable = var.sonarqube_subnet_variable
 }
 
 module "sonarqube_network_security_group" {
-  source  = "app.terraform.io/prismpay/modules/azure//network_security_group"
+  source  = "app.terraform.io/organization-name/modules/azure//network_security_group"
   version = "1.0.0"
 
   name                = "${var.environment}-${var.project}-network-security-group-sonarqube-subnet"
@@ -213,7 +213,7 @@ module "sonarqube_network_security_group" {
 
 
 module "sonarqube_network_security_group_association" {
-  source  = "app.terraform.io/prismpay/modules/azure//subnet_network_security_group_association"
+  source  = "app.terraform.io/organization-name/modules/azure//subnet_network_security_group_association"
   version = "1.0.0"
 
   for_each = module.sonarqube_subnet.subnet_id
@@ -225,7 +225,7 @@ module "sonarqube_network_security_group_association" {
 //--------------------------------------------------------------------------------
 
 module "route_table" {
-  source  = "app.terraform.io/prismpay/modules/azure//route_table"
+  source  = "app.terraform.io/organization-name/modules/azure//route_table"
   version = "1.0.0"
 
   name                = "${var.environment}-${var.project}-route-table"
@@ -236,7 +236,7 @@ module "route_table" {
 }
 
 module "cardholder_subnet_route_table_association" {
-  source  = "app.terraform.io/prismpay/modules/azure//subnet_route_table_association"
+  source  = "app.terraform.io/organization-name/modules/azure//subnet_route_table_association"
   version = "1.0.0"
 
   subnet_id      = module.cardholder_subnet.subnet_id
@@ -244,7 +244,7 @@ module "cardholder_subnet_route_table_association" {
 }
 
 module "internal_subnet_route_table_association" {
-  source  = "app.terraform.io/prismpay/modules/azure//subnet_route_table_association"
+  source  = "app.terraform.io/organization-name/modules/azure//subnet_route_table_association"
   version = "1.0.0"
 
   subnet_id      = module.internal_subnet.subnet_id
@@ -252,7 +252,7 @@ module "internal_subnet_route_table_association" {
 }
 
 module "application_gateway_subnet_route_table_association" {
-  source  = "app.terraform.io/prismpay/modules/azure//subnet_route_table_association"
+  source  = "app.terraform.io/organization-name/modules/azure//subnet_route_table_association"
   version = "1.0.0"
 
   subnet_id      = module.application_gateway_subnet.subnet_id
@@ -260,7 +260,7 @@ module "application_gateway_subnet_route_table_association" {
 }
 
 module "apim_subnet_route_table_association" {
-  source  = "app.terraform.io/prismpay/modules/azure//subnet_route_table_association"
+  source  = "app.terraform.io/organization-name/modules/azure//subnet_route_table_association"
   version = "1.0.0"
 
   subnet_id      = module.apim_subnet.subnet_id
@@ -268,7 +268,7 @@ module "apim_subnet_route_table_association" {
 }
 
 module "mssql_server_subnet_route_table_association" {
-  source  = "app.terraform.io/prismpay/modules/azure//subnet_route_table_association"
+  source  = "app.terraform.io/organization-name/modules/azure//subnet_route_table_association"
   version = "1.0.0"
 
   subnet_id      = module.mssql_server_subnet.subnet_id
@@ -276,7 +276,7 @@ module "mssql_server_subnet_route_table_association" {
 }
 
 module "sonarqube_subnet_route_table_association" {
-  source  = "app.terraform.io/prismpay/modules/azure//subnet_route_table_association"
+  source  = "app.terraform.io/organization-name/modules/azure//subnet_route_table_association"
   version = "1.0.0"
 
   for_each = module.sonarqube_subnet.subnet_id

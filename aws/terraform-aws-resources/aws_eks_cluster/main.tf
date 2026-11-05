@@ -58,28 +58,28 @@ data "aws_subnet" "public_subnet_c" {
 
 // Cluster IAM roles and policies
 module "EKSIAMRole" {
-  source = "app.terraform.io/quidax/modules/aws/aws_iam_role"
+  source = "app.terraform.io/organization-name/modules/aws/aws_iam_role"
   version = "1.0.0"
   iam_role_name      = "${var.owner}${var.environment}EKSIAMRole"
   assume_role_policy = var.assume_role_policy_EKSIAMRole
 }
 
 module "AmazonEKSClusterPolicy" {
-  source = "app.terraform.io/quidax/modules/aws/aws_iam_role_policy_attachment"
+  source = "app.terraform.io/organization-name/modules/aws/aws_iam_role_policy_attachment"
   version = "1.0.0"
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKSClusterPolicy"
   role       = module.EKSIAMRole.iam_role_name
 }
 
 module "AmazonEKSServicePolicy" {
-  source = "app.terraform.io/quidax/modules/aws/aws_iam_role_policy_attachment"
+  source = "app.terraform.io/organization-name/modules/aws/aws_iam_role_policy_attachment"
   version = "1.0.0" 
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKSServicePolicy"
   role       = module.EKSIAMRole.iam_role_name
 }
 
 module "PolicyNLB" {
-  source = "app.terraform.io/quidax/modules/aws/aws_iam_role_policy"
+  source = "app.terraform.io/organization-name/modules/aws/aws_iam_role_policy"
   version = "1.0.0" 
   iam_role_policy_name   = "${var.owner}${var.environment}EKSPolicyNLB"
   iam_role_policy_role   = module.EKSIAMRole.iam_role_name
@@ -87,7 +87,7 @@ module "PolicyNLB" {
 }
 
 module "PolicyCloudWatchMetrics" {
-  source = "app.terraform.io/quidax/modules/aws/aws_iam_role_policy"
+  source = "app.terraform.io/organization-name/modules/aws/aws_iam_role_policy"
   version = "1.0.0"
   iam_role_policy_name   = "${var.owner}${var.environment}EKSPolicyCloudWatchMetrics"
   iam_role_policy_role   = module.EKSIAMRole.iam_role_name
@@ -96,7 +96,7 @@ module "PolicyCloudWatchMetrics" {
 
 // Security groups and rules
 module "ControlPlaneSecurityGroup" {
-  source = "app.terraform.io/quidax/modules/aws/aws_security_group"
+  source = "app.terraform.io/organization-name/modules/aws/aws_security_group"
   version = "1.0.0"
   name        = "${var.owner}${var.environment}EKSControlPlaneSecurityGroup"
   description = "Communication between the control plane and worker nodegroups"
@@ -105,7 +105,7 @@ module "ControlPlaneSecurityGroup" {
 }
 
 module "ClusterSharedNodeSecurityGroup" {
-  source = "app.terraform.io/quidax/modules/aws/aws_security_group"
+  source = "app.terraform.io/organization-name/modules/aws/aws_security_group"
   version = "1.0.0"
   name        = "${var.owner}${var.environment}EKSClusterSharedNodeSecurityGroup"
   description = "Communication between all nodes in the cluster"
@@ -114,7 +114,7 @@ module "ClusterSharedNodeSecurityGroup" {
 }
 
 module "IngressDefaultClusterToNodeSG" {
-  source = "app.terraform.io/quidax/modules/aws/aws_security_group_rule_source_sg_id"
+  source = "app.terraform.io/organization-name/modules/aws/aws_security_group_rule_source_sg_id"
   version = "1.0.0"
   type                     = "ingress"
   description              = "Allow managed and unmanaged nodes to communicate with each other (all ports)"
@@ -126,7 +126,7 @@ module "IngressDefaultClusterToNodeSG" {
 }
 
 module "IngressInterNodeGroupSG" {
-  source = "app.terraform.io/quidax/modules/aws/aws_security_group_rule_source_sg_id"
+  source = "app.terraform.io/organization-name/modules/aws/aws_security_group_rule_source_sg_id"
   version = "1.0.0"
   type                     = "ingress"
   description              = "Allow nodes to communicate with each other (all ports)"
@@ -138,7 +138,7 @@ module "IngressInterNodeGroupSG" {
 }
 
 module "IngressNodeToDefaultClusterSG" {
-  source = "app.terraform.io/quidax/modules/aws/aws_security_group_rule_source_sg_id"
+  source = "app.terraform.io/organization-name/modules/aws/aws_security_group_rule_source_sg_id"
   version = "1.0.0"
   type                     = "ingress"
   description              = "Allow unmanaged nodes to communicate with control plane (all ports)"
@@ -150,7 +150,7 @@ module "IngressNodeToDefaultClusterSG" {
 }
 
 module "EgressClusterSharedNodeAllowAll" {
-  source = "app.terraform.io/quidax/modules/aws/aws_security_group_rule_cidr_blocks"
+  source = "app.terraform.io/organization-name/modules/aws/aws_security_group_rule_cidr_blocks"
   version = "1.0.0"
   type                     = "egress"
   description              = "Allow Cluster Shared Node Security Group"
@@ -164,7 +164,7 @@ module "EgressClusterSharedNodeAllowAll" {
 
 // Cluster
 module "eks_cluster" {
-  source = "app.terraform.io/quidax/modules/aws/aws_eks_cluster"
+  source = "app.terraform.io/organization-name/modules/aws/aws_eks_cluster"
   version = "1.0.0"
   name                = "${var.environment}EKS-${random_id.prefix.id}"
   role_arn            = module.EKSIAMRole.iam_role_arn

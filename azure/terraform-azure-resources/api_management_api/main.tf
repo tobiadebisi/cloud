@@ -1,5 +1,5 @@
 module "resource_group" {
-  source  = "app.terraform.io/prismpay/modules/azure//resource_group"
+  source  = "app.terraform.io/organization-name/modules/azure//resource_group"
   version = "1.0.0"
 
   name        = "${var.environment}-${var.api_project}-api-management-api-resource-group"
@@ -25,7 +25,7 @@ data "http" "swagger" {
 }
 
 module "api_management_api" {
-  source  = "app.terraform.io/prismpay/modules/azure//api_management_api"
+  source  = "app.terraform.io/organization-name/modules/azure//api_management_api"
   version = "1.0.0"
 
   name                = "${var.environment}-${var.api_project}-api-management-api"

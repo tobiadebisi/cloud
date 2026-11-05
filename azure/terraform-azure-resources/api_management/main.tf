@@ -1,5 +1,5 @@
 module "resource_group" {
-  source  = "app.terraform.io/prismpay/modules/azure//resource_group"
+  source  = "app.terraform.io/organization-name/modules/azure//resource_group"
   version = "1.0.0"
 
   name        = "${var.environment}-${var.project}-apim-resource-group"
@@ -30,7 +30,7 @@ data "azurerm_subnet" "subnet" {
 }
 
 module "apim_public_ip" {
-  source  = "app.terraform.io/prismpay/modules/azure//public_ip"
+  source  = "app.terraform.io/organization-name/modules/azure//public_ip"
   version = "1.0.0"
 
   name                = "${var.environment}-${var.project}-apim-public_ip"
@@ -44,7 +44,7 @@ module "apim_public_ip" {
 }
 
 module "api_management" {
-  source  = "app.terraform.io/prismpay/modules/azure//api_management"
+  source  = "app.terraform.io/organization-name/modules/azure//api_management"
   version = "1.0.0"
 
   name                  = "${var.environment}-${var.project}-api-management"

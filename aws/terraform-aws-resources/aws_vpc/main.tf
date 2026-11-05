@@ -15,7 +15,7 @@ data "aws_availability_zones" "available" {
 
 // VPC build
 module "vpc" {
-  source = "app.terraform.io/quidax/modules/aws/aws_vpc"
+  source = "app.terraform.io/organization-name/modules/aws/aws_vpc"
   version = "1.0.0"
   cidr_block  = var.vpc_cidr_block
   vpc_name    = "${var.environment}${var.project}VPC"
@@ -24,7 +24,7 @@ module "vpc" {
 
 // Public and private subnets
 module "private_subnet_a" {
-  source = "app.terraform.io/quidax/modules/aws/aws_private_subnet"
+  source = "app.terraform.io/organization-name/modules/aws/aws_private_subnet"
   version = "1.0.0"
   vpc_id              = module.vpc.vpc_id
   cidr_block          = var.private_subnet_a_cidr_block
@@ -34,7 +34,7 @@ module "private_subnet_a" {
 }
 
 module "private_subnet_b" {
-  source = "app.terraform.io/quidax/modules/aws/aws_private_subnet"
+  source = "app.terraform.io/organization-name/modules/aws/aws_private_subnet"
   version = "1.0.0"
   vpc_id              = module.vpc.vpc_id
   cidr_block          = var.private_subnet_b_cidr_block
@@ -44,7 +44,7 @@ module "private_subnet_b" {
 }
 
 module "private_subnet_c" {
-  source = "app.terraform.io/quidax/modules/aws/aws_private_subnet"
+  source = "app.terraform.io/organization-name/modules/aws/aws_private_subnet"
   version = "1.0.0"
   vpc_id              = module.vpc.vpc_id
   cidr_block          = var.private_subnet_c_cidr_block
@@ -54,7 +54,7 @@ module "private_subnet_c" {
 }
 
 module "public_subnet_a" {
-  source = "app.terraform.io/quidax/modules/aws/aws_public_subnet"
+  source = "app.terraform.io/organization-name/modules/aws/aws_public_subnet"
   version = "1.0.0"
   vpc_id             = module.vpc.vpc_id
   cidr_block         = var.public_subnet_a_cidr_block
@@ -64,7 +64,7 @@ module "public_subnet_a" {
 }
 
 module "public_subnet_b" {
-  source = "app.terraform.io/quidax/modules/aws/aws_public_subnet"
+  source = "app.terraform.io/organization-name/modules/aws/aws_public_subnet"
   version = "1.0.0"
   vpc_id             = module.vpc.vpc_id
   cidr_block         = var.public_subnet_b_cidr_block
@@ -74,7 +74,7 @@ module "public_subnet_b" {
 }
 
 module "public_subnet_c" {
-  source = "app.terraform.io/quidax/modules/aws/aws_public_subnet"
+  source = "app.terraform.io/organization-name/modules/aws/aws_public_subnet"
   version = "1.0.0"
   vpc_id             = module.vpc.vpc_id
   cidr_block         = var.public_subnet_c_cidr_block
@@ -85,7 +85,7 @@ module "public_subnet_c" {
 
 // Internet gateway
 module "internet_gateway" {
-  source = "app.terraform.io/quidax/modules/aws/aws_internet_gateway"
+  source = "app.terraform.io/organization-name/modules/aws/aws_internet_gateway"
   version = "1.0.0"
   vpc_id                = module.vpc.vpc_id
   internet_gateway_name = "${var.environment}${var.project}InternetGateway-${random_id.prefix.hex}"
@@ -94,7 +94,7 @@ module "internet_gateway" {
 
 // Elastic IP for the NAT gateway
 module "eip" {
-  source = "app.terraform.io/quidax/modules/aws/aws_eip"
+  source = "app.terraform.io/organization-name/modules/aws/aws_eip"
   version = "1.0.0"
   eip_name    = "${var.environment}${var.project}EIP-${random_id.prefix.hex}"
   environment = var.environment
@@ -102,7 +102,7 @@ module "eip" {
 
 // NAT gateway
 module "nat_gateway" {
-  source = "app.terraform.io/quidax/modules/aws/aws_nat_gateway"
+  source = "app.terraform.io/organization-name/modules/aws/aws_nat_gateway"
   version = "1.0.0"
   eip_id           = module.eip.eip_id
   subnet_id        = module.private_subnet_a.private_subnet_id
@@ -112,7 +112,7 @@ module "nat_gateway" {
 
 // Route tables and subnet associations
 module "private_route_table_a" {
-  source = "app.terraform.io/quidax/modules/aws/aws_private_route_table"
+  source = "app.terraform.io/organization-name/modules/aws/aws_private_route_table"
   version = "1.0.0"
   vpc_id = module.vpc.vpc_id
   nat_gateway_id           = module.nat_gateway.nat_gateway_id
@@ -121,7 +121,7 @@ module "private_route_table_a" {
 }
 
 module "private_route_table_b" {
-  source = "app.terraform.io/quidax/modules/aws/aws_private_route_table"
+  source = "app.terraform.io/organization-name/modules/aws/aws_private_route_table"
   version = "1.0.0"
   vpc_id = module.vpc.vpc_id
   nat_gateway_id           = module.nat_gateway.nat_gateway_id
@@ -130,7 +130,7 @@ module "private_route_table_b" {
 }
 
 module "private_route_table_c" {
-  source = "app.terraform.io/quidax/modules/aws/aws_private_route_table"
+  source = "app.terraform.io/organization-name/modules/aws/aws_private_route_table"
   version = "1.0.0"
   vpc_id = module.vpc.vpc_id
   nat_gateway_id           = module.nat_gateway.nat_gateway_id
@@ -139,7 +139,7 @@ module "private_route_table_c" {
 }
 
 module "public_route_table" {
-  source = "app.terraform.io/quidax/modules/aws/aws_public_route_table"
+  source = "app.terraform.io/organization-name/modules/aws/aws_public_route_table"
   version = "1.0.0"
   vpc_id = module.vpc.vpc_id
   internet_gateway_id     = module.nat_gateway.nat_gateway_id
@@ -148,49 +148,49 @@ module "public_route_table" {
 }
 
 module "private_table_association_a" {
-  source = "app.terraform.io/quidax/modules/aws/aws_route_table_association"
+  source = "app.terraform.io/organization-name/modules/aws/aws_route_table_association"
   version = "1.0.0"
   subnet_id      = module.private_subnet_a.private_subnet_id
   route_table_id = module.private_route_table_a.private_route_table_id
 }
 
 module "private_table_association_b" {
-  source = "app.terraform.io/quidax/modules/aws/aws_route_table_association"
+  source = "app.terraform.io/organization-name/modules/aws/aws_route_table_association"
   version = "1.0.0"
   subnet_id      = module.private_subnet_b.private_subnet_id
   route_table_id = module.private_route_table_b.private_route_table_id
 }
 
 module "private_table_association_c" {
-  source = "app.terraform.io/quidax/modules/aws/aws_route_table_association"
+  source = "app.terraform.io/organization-name/modules/aws/aws_route_table_association"
   version = "1.0.0"
   subnet_id      = module.private_subnet_c.private_subnet_id
   route_table_id = module.private_route_table_c.private_route_table_id
 }
 
 module "public_table_assoc_association_a" {
-  source = "app.terraform.io/quidax/modules/aws/aws_route_table_association"
+  source = "app.terraform.io/organization-name/modules/aws/aws_route_table_association"
   version = "1.0.0"
   subnet_id      = module.public_subnet_a.public_subnet_id
   route_table_id = module.public_route_table.public_route_table_id
 }
 
 module "public_table_assoc_association_b" {
-  source = "app.terraform.io/quidax/modules/aws/aws_route_table_association"
+  source = "app.terraform.io/organization-name/modules/aws/aws_route_table_association"
   version = "1.0.0"
   subnet_id      = module.public_subnet_b.public_subnet_id
   route_table_id = module.public_route_table.public_route_table_id
 }
 
 module "public_table_assoc_association_c" {
-  source = "app.terraform.io/quidax/modules/aws/aws_route_table_association"
+  source = "app.terraform.io/organization-name/modules/aws/aws_route_table_association"
   version = "1.0.0"
   subnet_id      = module.public_subnet_c.public_subnet_id
   route_table_id =module.public_route_table.public_route_table_id
 }
 
 module "default_network_acl" {
-  source = "app.terraform.io/quidax/modules/aws/aws_default_network_acl"
+  source = "app.terraform.io/organization-name/modules/aws/aws_default_network_acl"
   version = "1.0.0"
   default_network_acl_id =  module.vpc.default_network_acl_id
   default_network_acl_name = "${var.environment}${var.project}DefaultNetworkACL-${random_id.prefix.hex}" 
@@ -198,7 +198,7 @@ module "default_network_acl" {
 }
 /*
 module "network_acl_rule_ingress" {
-  source = "app.terraform.io/quidax/modules/aws/aws_network_acl"
+  source = "app.terraform.io/organization-name/modules/aws/aws_network_acl"
   //version = "1.0.0"
   for_each = var.ingress_cidr_block
 
@@ -212,7 +212,7 @@ module "network_acl_rule_ingress" {
 }
 
 module "network_acl_rule_egress" {
-  source = "app.terraform.io/quidax/modules/aws/aws_network_acl"
+  source = "app.terraform.io/organization-name/modules/aws/aws_network_acl"
   //version = "1.0.0"
   for_each = var.egress_cidr_block
 

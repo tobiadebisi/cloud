@@ -1,5 +1,5 @@
 module "resource_group" {
-  source  = "app.terraform.io/prismpay/modules/azure//resource_group"
+  source  = "app.terraform.io/organization-name/modules/azure//resource_group"
   version = "1.0.0"
 
   name        = "${var.environment}-${var.project}-mssql-server-resource-group"
@@ -15,7 +15,7 @@ data "azurerm_subnet" "subnet" {
 }
 
 module "mssql_virtual_network_rule" {
-  source  = "app.terraform.io/prismpay/modules/azure//mssql_virtual_network_rule"
+  source  = "app.terraform.io/organization-name/modules/azure//mssql_virtual_network_rule"
   version = "1.0.0"
 
   name      = "${var.environment}-${var.project}-mssql-virtual-network-rule"
@@ -24,7 +24,7 @@ module "mssql_virtual_network_rule" {
 }
 
 module "mssql_firewall_rule" {
-  source  = "app.terraform.io/prismpay/modules/azure//mssql_firewall_rule"
+  source  = "app.terraform.io/organization-name/modules/azure//mssql_firewall_rule"
   version = "1.0.0"
 
   name             = "${var.environment}-${var.project}-mssql-firewall-rule"
@@ -34,7 +34,7 @@ module "mssql_firewall_rule" {
 }
 
 module "mssql_server" {
-  source  = "app.terraform.io/prismpay/modules/azure//mssql_server"
+  source  = "app.terraform.io/organization-name/modules/azure//mssql_server"
   version = "1.0.0"
 
   name                          = "${var.environment}-${var.project}-mssql-server-server"
@@ -54,7 +54,7 @@ module "mssql_server" {
 }
 
 module "cardholder_mssql_database" {
-  source  = "app.terraform.io/prismpay/modules/azure//mssql_database"
+  source  = "app.terraform.io/organization-name/modules/azure//mssql_database"
   version = "1.0.0"
 
   name                                = "${var.environment}-${var.sonarqube_project}-database"
@@ -72,7 +72,7 @@ module "cardholder_mssql_database" {
 }
 
 module "internal_mssql_database" {
-  source  = "app.terraform.io/prismpay/modules/azure//mssql_database"
+  source  = "app.terraform.io/organization-name/modules/azure//mssql_database"
   version = "1.0.0"
 
   name                                = "${var.environment}-${var.internal_project}-internal-database"

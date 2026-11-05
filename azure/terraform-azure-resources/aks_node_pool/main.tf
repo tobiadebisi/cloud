@@ -1,5 +1,5 @@
 module "resource_group" {
-  source  = "app.terraform.io/prismpay/modules/azure//resource_group"
+  source  = "app.terraform.io/organization-name/modules/azure//resource_group"
   version = "1.0.0"
 
   name        = "${var.environment}-${var.project}-node-pool-resource-group"
@@ -9,7 +9,7 @@ module "resource_group" {
 }
 
 module "aks_cluster_node_pool" {
-  source  = "app.terraform.io/prismpay/modules/azure//aks_node_pool"
+  source  = "app.terraform.io/organization-name/modules/azure//aks_node_pool"
   version = "1.0.0"
 
   node_pools  = var.node_pools

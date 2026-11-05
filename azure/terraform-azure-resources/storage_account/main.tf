@@ -1,5 +1,5 @@
 module "resource_group" {
-  source  = "app.terraform.io/prismpay/modules/azure//resource_group"
+  source  = "app.terraform.io/organization-name/modules/azure//resource_group"
   version = "1.0.0"
 
   name        = "${var.environment}-${var.project}-storage-account-resource-group"
@@ -9,7 +9,7 @@ module "resource_group" {
 }
 
 module "storage_account" {
-  source  = "app.terraform.io/prismpay/modules/azure//storage_account"
+  source  = "app.terraform.io/organization-name/modules/azure//storage_account"
   version = "1.0.0"
 
   name                       = "${var.environment}${var.project}storageacct"
@@ -24,7 +24,7 @@ module "storage_account" {
 }
 
 module "storage_container" {
-  source  = "app.terraform.io/prismpay/modules/azure//storage_container"
+  source  = "app.terraform.io/organization-name/modules/azure//storage_container"
   version = "1.0.0"
 
   name                  = "${var.environment}${var.project}storagecont"

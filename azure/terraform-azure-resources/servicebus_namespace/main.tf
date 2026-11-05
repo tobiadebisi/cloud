@@ -1,5 +1,5 @@
 module "resource_group" {
-  source  = "app.terraform.io/prismpay/modules/azure//resource_group"
+  source  = "app.terraform.io/organization-name/modules/azure//resource_group"
   version = "1.0.0"
 
   name        = "${var.environment}-${var.project}-servicebus-namespace-resource-group"
@@ -9,7 +9,7 @@ module "resource_group" {
 }
 
 module "servicebus_namespace" {
-  source  = "app.terraform.io/prismpay/modules/azure//servicebus_namespace"
+  source  = "app.terraform.io/organization-name/modules/azure//servicebus_namespace"
   version = "1.0.0"
 
   name                = "${var.environment}-${var.project}-servicebus-namespace"

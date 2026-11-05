@@ -1,5 +1,5 @@
 module "resource_group" {
-  source  = "app.terraform.io/prismpay/modules/azure//resource_group"
+  source  = "app.terraform.io/organization-name/modules/azure//resource_group"
   version = "1.0.0"
 
   name        = "${var.environment}-${var.project}-web-application-firewall-policy-resource-group"
@@ -9,7 +9,7 @@ module "resource_group" {
 }
 
 module "web_application_firewall_policy" {
-  source  = "app.terraform.io/prismpay/modules/azure//web_application_firewall_policy"
+  source  = "app.terraform.io/organization-name/modules/azure//web_application_firewall_policy"
   version = "1.0.0"
 
   name    = "${var.environment}-${var.project}-web-application-firewall-policy"

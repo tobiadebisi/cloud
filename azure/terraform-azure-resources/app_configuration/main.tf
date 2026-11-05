@@ -1,5 +1,5 @@
 module "resource_group" {
-  source  = "app.terraform.io/prismpay/modules/azure//resource_group"
+  source  = "app.terraform.io/organization-name/modules/azure//resource_group"
   version = "1.0.0"
 
   name        = "${var.environment}-${var.project}-app-configuration-resource-group"
@@ -19,7 +19,7 @@ data "azurerm_user_assigned_identity" "user_assigned_identity" {
 }
 
 module "app_configuration" {
-  source  = "app.terraform.io/prismpay/modules/azure//app_configuration"
+  source  = "app.terraform.io/organization-name/modules/azure//app_configuration"
   version = "1.0.0"
 
   name                = "${var.environment}-${var.project}-app-configuration"
@@ -32,7 +32,7 @@ module "app_configuration" {
 }
 
 module "app_configuration_vault_role_assignment" {
-  source  = "app.terraform.io/prismpay/modules/azure//role_assignment"
+  source  = "app.terraform.io/organization-name/modules/azure//role_assignment"
   version = "1.0.0"
 
   scope                = data.azurerm_key_vault.key_vault.id

@@ -1,5 +1,5 @@
 module "resource_group" {
-  source  = "app.terraform.io/prismpay/modules/azure//resource_group"
+  source  = "app.terraform.io/organization-name/modules/azure//resource_group"
   version = "1.0.0"
 
   name        = "${var.environment}-${var.project}-application-gateway"
@@ -34,7 +34,7 @@ locals {
 }
 
 module "public_ip" {
-  source  = "app.terraform.io/prismpay/modules/azure//public_ip"
+  source  = "app.terraform.io/organization-name/modules/azure//public_ip"
   version = "1.0.0"
 
   name                = "${var.environment}-${var.project}-appgw-public_ip"
@@ -47,7 +47,7 @@ module "public_ip" {
 }
 
 module "application_gateway" {
-  source  = "app.terraform.io/prismpay/modules/azure//application_gateway"
+  source  = "app.terraform.io/organization-name/modules/azure//application_gateway"
   version = "1.0.0"
 
   name                           = "${var.environment}-${var.project}-application-gateway"

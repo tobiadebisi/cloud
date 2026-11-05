@@ -1,5 +1,5 @@
 module "resource_group" {
-  source  = "app.terraform.io/prismpay/modules/azure//resource_group"
+  source  = "app.terraform.io/organization-name/modules/azure//resource_group"
   version = "1.0.0"
 
   name        = "${var.environment}-${var.project}-container-registry-resource-group"
@@ -9,7 +9,7 @@ module "resource_group" {
 }
 
 module "container_registry" {
-  source  = "app.terraform.io/prismpay/modules/azure//container_registry"
+  source  = "app.terraform.io/organization-name/modules/azure//container_registry"
   version = "1.0.0"
 
   name                = "${var.environment}${var.project}containerregistry"
@@ -21,7 +21,7 @@ module "container_registry" {
 }
 
 module "container_registry_webhook" {
-  source  = "app.terraform.io/prismpay/modules/azure//container_registry_webhook"
+  source  = "app.terraform.io/organization-name/modules/azure//container_registry_webhook"
   version = "1.0.0"
 
   name                = "${var.environment}${var.project}slackchannelwebhook"

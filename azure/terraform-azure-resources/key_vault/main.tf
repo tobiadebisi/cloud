@@ -1,5 +1,5 @@
 module "resource_group" {
-  source  = "app.terraform.io/prismpay/modules/azure//resource_group"
+  source  = "app.terraform.io/organization-name/modules/azure//resource_group"
   version = "1.0.0"
 
   name        = "${var.environment}-${var.project}-key-vault-resource-group"
@@ -11,7 +11,7 @@ module "resource_group" {
 data "azurerm_client_config" "current" {}
 
 module "key_vault" {
-  source  = "app.terraform.io/prismpay/modules/azure//key_vault"
+  source  = "app.terraform.io/organization-name/modules/azure//key_vault"
   version = "1.0.0"
 
   name                        = "${var.environment}-${var.project}-key-vault0000"
@@ -28,7 +28,7 @@ module "key_vault" {
 }
 
 module "key_vault_access_policy" {
-  source  = "app.terraform.io/prismpay/modules/azure//key_vault_access_policy"
+  source  = "app.terraform.io/organization-name/modules/azure//key_vault_access_policy"
   version = "1.0.0"
 
   key_vault_id            = module.key_vault.id
@@ -42,7 +42,7 @@ module "key_vault_access_policy" {
 }
 
 module "user_assigned_identity" {
-  source  = "app.terraform.io/prismpay/modules/azure//user_assigned_identity"
+  source  = "app.terraform.io/organization-name/modules/azure//user_assigned_identity"
   version = "1.0.0"
 
   name                = "${var.environment}-${var.project}-key-vault-assigned-identity"
@@ -51,7 +51,7 @@ module "user_assigned_identity" {
 }
 
 module "key_vault_role_assignment" {
-  source  = "app.terraform.io/prismpay/modules/azure//role_assignment"
+  source  = "app.terraform.io/organization-name/modules/azure//role_assignment"
   version = "1.0.0"
 
   scope                = module.key_vault.id

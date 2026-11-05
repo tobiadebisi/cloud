@@ -1,5 +1,5 @@
 module "resource_group" {
-  source  = "app.terraform.io/prismpay/modules/azure//resource_group"
+  source  = "app.terraform.io/organization-name/modules/azure//resource_group"
   version = "1.0.0"
 
   name        = "${var.environment}-${var.project}-managed-disk-resource-group"
@@ -10,7 +10,7 @@ module "resource_group" {
 
 
 module "managed_disk" {
-  source  = "app.terraform.io/prismpay/modules/azure//managed_disk"
+  source  = "app.terraform.io/organization-name/modules/azure//managed_disk"
   version = "1.0.0"
 
   name                 = "${var.environment}-${var.local_project}-managed-disk"

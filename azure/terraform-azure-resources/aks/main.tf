@@ -1,5 +1,5 @@
 module "resource_group" {
-  source  = "app.terraform.io/prismpay/modules/azure//resource_group"
+  source  = "app.terraform.io/organization-name/modules/azure//resource_group"
   version = "1.0.0"
 
   name        = "${var.environment}-${var.project}-${var.local_project}-aks-resource-group"
@@ -11,7 +11,7 @@ module "resource_group" {
 data "azuread_client_config" "current" {}
 
 #module "aad_group" {
-#  source  = "app.terraform.io/prismpay/modules/azure//ad_group"
+#  source  = "app.terraform.io/organization-name/modules/azure//ad_group"
 #  version = "1.0.0"
 
 #  display_name = var.display_name
@@ -35,7 +35,7 @@ data "azurerm_subnet" "subnet" {
 }
 
 module "aks" {
-  source  = "app.terraform.io/prismpay/modules/azure//aks"
+  source  = "app.terraform.io/organization-name/modules/azure//aks"
   version = "1.0.0"
 
   name                      = "${var.environment}-${var.project}-${var.local_project}-aks"
@@ -68,7 +68,7 @@ module "aks" {
 }
 
 #module "aks_metrics_role_assignment" {
-#  source  = "app.terraform.io/prismpay/modules/azure//role_assignment"
+#  source  = "app.terraform.io/organization-name/modules/azure//role_assignment"
 #  version = "1.0.0"
 
 #  scope                = module.aks.aks_id
@@ -77,7 +77,7 @@ module "aks" {
 #}
 
 module "aks_subnet_role_assignment" {
-  source  = "app.terraform.io/prismpay/modules/azure//role_assignment"
+  source  = "app.terraform.io/organization-name/modules/azure//role_assignment"
   version = "1.0.0"
 
   scope                = data.azurerm_subnet.subnet.id
@@ -86,7 +86,7 @@ module "aks_subnet_role_assignment" {
 }
 
 module "aks_acr_role_assignment" {
-  source  = "app.terraform.io/prismpay/modules/azure//role_assignment"
+  source  = "app.terraform.io/organization-name/modules/azure//role_assignment"
   version = "1.0.0"
 
   scope                = data.azurerm_container_registry.container_registry.id
@@ -95,7 +95,7 @@ module "aks_acr_role_assignment" {
 }
 
 module "aks_vault_role_assignment" {
-  source  = "app.terraform.io/prismpay/modules/azure//role_assignment"
+  source  = "app.terraform.io/organization-name/modules/azure//role_assignment"
   version = "1.0.0"
 
   scope                = data.azurerm_key_vault.key_vault.id

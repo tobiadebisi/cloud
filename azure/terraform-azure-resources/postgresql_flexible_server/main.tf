@@ -1,5 +1,5 @@
 module "resource_group" {
-  source  = "app.terraform.io/prismpay/modules/azure//resource_group"
+  source  = "app.terraform.io/organization-name/modules/azure//resource_group"
   version = "1.0.0"
 
   name        = "${var.environment}-${var.project}-postgresql-flexible-server-resource-group"
@@ -20,7 +20,7 @@ data "azurerm_private_dns_zone" "private_dns_zone" {
 }
 
 module "postgresql_flexible_server" {
-  source  = "app.terraform.io/prismpay/modules/azure//postgresql_flexible_server"
+  source  = "app.terraform.io/organization-name/modules/azure//postgresql_flexible_server"
   version = "1.0.0"
 
   name                   = var.name
@@ -38,7 +38,7 @@ module "postgresql_flexible_server" {
 }
 
 module "postgresql_flexible_server_firewall_rule" {
-  source  = "app.terraform.io/prismpay/modules/azure//postgresql_flexible_server_firewall_rule"
+  source  = "app.terraform.io/organization-name/modules/azure//postgresql_flexible_server_firewall_rule"
   version = "1.0.0"
 
   name             = "${var.environment}-${var.project}-postgresql-flexible-server-firewall-rule"
