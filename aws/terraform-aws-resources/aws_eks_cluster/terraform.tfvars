@@ -1,4 +1,4 @@
-owner = "Quidax"
+owner = "organisation-name"
 
 environment = "Staging"
 
