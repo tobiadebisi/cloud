@@ -1,27 +1,27 @@
 // Nodegroup IAM roles and policies
 module "NodeInstanceRole" {
-  source = "app.terraform.io/quidax/modules/aws/aws_iam_role"
+  source = "app.terraform.io/organisation-name/modules/aws/aws_iam_role"
   version = "1.0.0"
   iam_role_name      = "${var.owner}${var.environment}NodeInstanceRole"
   assume_role_policy = var.assume_role_policy_NodeInstanceRole
 }
 
 module "AmazonEKSWorkerNodePolicy" {
-  source = "app.terraform.io/quidax/modules/aws/aws_iam_role_policy_attachment"
+  source = "app.terraform.io/organisation-name/modules/aws/aws_iam_role_policy_attachment"
   version = "1.0.0"
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy"
   role       = module.NodeInstanceRole.iam_role_name
 }
 
 module "AmazonEKS_CNI_Policy" {
-  source = "app.terraform.io/quidax/modules/aws/aws_iam_role_policy_attachment"
+  source = "app.terraform.io/organisation-name/modules/aws/aws_iam_role_policy_attachment"
   version = "1.0.0"
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy"
   role       = module.NodeInstanceRole.iam_role_name
 }
 
 module "AmazonEC2ContainerRegistryReadOnly" {
-  source = "app.terraform.io/quidax/modules/aws/aws_iam_role_policy_attachment"
+  source = "app.terraform.io/organisation-name/modules/aws/aws_iam_role_policy_attachment"
   version = "1.0.0"
   policy_arn = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
   role       = module.NodeInstanceRole.iam_role_name
@@ -30,7 +30,7 @@ module "AmazonEC2ContainerRegistryReadOnly" {
 
 // Instance profile
 module "node_iam_instance_profile" {
-  source = "app.terraform.io/quidax/modules/aws/aws_iam_instance_profile"
+  source = "app.terraform.io/organisation-name/modules/aws/aws_iam_instance_profile"
   version = "1.0.0"
   name = "${var.owner}${var.environment}EKSInstanceProfile"
   role = module.NodeInstanceRole.iam_role_name
@@ -39,7 +39,7 @@ module "node_iam_instance_profile" {
 
 // Security groups and rules
 module "NodeGroupSecurityGroup" {
-  source = "app.terraform.io/quidax/modules/aws/aws_security_group"
+  source = "app.terraform.io/organisation-name/modules/aws/aws_security_group"
   version = "1.0.0"
   name        = "${var.owner}${var.environment}NodeGroupSecurityGroup"
   description = "Communication between the control plane and worker nodegroups"
@@ -48,7 +48,7 @@ module "NodeGroupSecurityGroup" {
 }
 
 module "EgressInterCluster" {
-  source = "app.terraform.io/quidax/modules/aws/aws_security_group_rule_source_sg_id"
+  source = "app.terraform.io/organisation-name/modules/aws/aws_security_group_rule_source_sg_id"
   version = "1.0.0"
   type                     = "egress"
   description              = "Allow control plane to communicate with worker nodes in group (kubelet and workload TCP ports)"
@@ -60,7 +60,7 @@ module "EgressInterCluster" {
 }
 
 module "EgressNodeGroupAllowAll" {
-  source = "app.terraform.io/quidax/modules/aws/aws_security_group_rule_cidr_blocks"
+  source = "app.terraform.io/organisation-name/modules/aws/aws_security_group_rule_cidr_blocks"
   version = "1.0.0"
 
   type                     = "egress"
@@ -74,7 +74,7 @@ module "EgressNodeGroupAllowAll" {
 }
 
 module "EgressInterClusterAPI" {
-  source = "app.terraform.io/quidax/modules/aws/aws_security_group_rule_source_sg_id"
+  source = "app.terraform.io/organisation-name/modules/aws/aws_security_group_rule_source_sg_id"
   version = "1.0.0"
   type                     = "egress"
   description              = "Allow control plane to communicate with worker nodegroup (workloads using HTTPS port, commonly used with extension API servers)"
@@ -86,7 +86,7 @@ module "EgressInterClusterAPI" {
 }
 
 module "IngressInterCluster" {
-  source = "app.terraform.io/quidax/modules/aws/aws_security_group_rule_source_sg_id"
+  source = "app.terraform.io/organisation-name/modules/aws/aws_security_group_rule_source_sg_id"
   version = "1.0.0"
   type                     = "ingress"
   description              = "Allow worker nodegroup to communicate with control plane (kubelet and workload TCP ports)"
@@ -98,7 +98,7 @@ module "IngressInterCluster" {
 }
 
 module "IngressInterClusterAPI" {
-  source = "app.terraform.io/quidax/modules/aws/aws_security_group_rule_source_sg_id"
+  source = "app.terraform.io/organisation-name/modules/aws/aws_security_group_rule_source_sg_id"
   version = "1.0.0"
   type                     = "ingress"
   description              = "Allow worker nodegroup to communicate with control plane (workloads using HTTPS port, commonly used with extension API servers)"
@@ -110,7 +110,7 @@ module "IngressInterClusterAPI" {
 }
 
 module "IngressInterClusterCP" {
-  source = "app.terraform.io/quidax/modules/aws/aws_security_group_rule_source_sg_id"
+  source = "app.terraform.io/organisation-name/modules/aws/aws_security_group_rule_source_sg_id"
   version = "1.0.0"
   type                     = "ingress"
   description              = "Allow control plane to receive API requests from worker nodegroup"
@@ -122,7 +122,7 @@ module "IngressInterClusterCP" {
 }
 
 module "SSHIPv4" {
-  source = "app.terraform.io/quidax/modules/aws/aws_security_group_rule_cidr_blocks"
+  source = "app.terraform.io/organisation-name/modules/aws/aws_security_group_rule_cidr_blocks"
   version = "1.0.0"
   type                     = "ingress"
   description              = "Allow SSH access to worker nodegroup"
@@ -135,7 +135,7 @@ module "SSHIPv4" {
 }
 
 module "SSHIPv6" {
-  source = "app.terraform.io/quidax/modules/aws/aws_security_group_rule_cidr_blocks"
+  source = "app.terraform.io/organisation-name/modules/aws/aws_security_group_rule_cidr_blocks"
   version = "1.0.0"
   type                     = "ingress"
   description              = "Allow SSH access to worker nodegroup"
@@ -148,7 +148,7 @@ module "SSHIPv6" {
 }
 
 module "NodeKeyPair" {
-  source = "app.terraform.io/quidax/modules/aws/aws_key_pair"
+  source = "app.terraform.io/organisation-name/modules/aws/aws_key_pair"
   version = "1.0.0"  
 
   key_name = "${var.environment}EKSNodeKeyPair"
@@ -185,7 +185,7 @@ USERDATA
 // Launch template
 
 module "NodeGroupLaunchTemplate" {
-  source = "app.terraform.io/quidax/modules/aws/aws_launch_template"
+  source = "app.terraform.io/organisation-name/modules/aws/aws_launch_template"
   version = "1.0.0"
   launch_template_name        = "${var.environment}NodeGroupLaunchTemplate"
   iam_instance_profile_name   = module.node_iam_instance_profile.iam_instance_profile_name
@@ -200,7 +200,7 @@ module "NodeGroupLaunchTemplate" {
 
 // Autoscaling Group
 module "autoscaling_group" {
-  source = "app.terraform.io/quidax/modules/aws/aws_autoscaling_group"
+  source = "app.terraform.io/organisation-name/modules/aws/aws_autoscaling_group"
   version = "1.0.0"
   name = "${var.environment}AutoScalingGroup-${random_id.prefix.id}"
   # aws_launch_template = aws_launch_template.NodeGroupLaunchTemplate.id
@@ -216,7 +216,7 @@ module "autoscaling_group" {
 }
 
 module "aws_autoscaling_policy" {
-  source = "app.terraform.io/quidax/modules/aws/aws_autoscaling_policy"
+  source = "app.terraform.io/organisation-name/modules/aws/aws_autoscaling_policy"
   version = "1.0.0"
   name = "${var.environment}AutoScalingPolicy-${random_id.prefix.id}"
   policy_type = var.policy_type
